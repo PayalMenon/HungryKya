@@ -10,8 +10,8 @@ The following **required** functionality is completed:
 
  [ ] The app includes **all required user stories** from Week 1 HungryKya
 * [ ] User can **switch between List and Map views on the home tabs by using tab**
-  * [ ] User can view restaurants on map base on restaurants' location.
-  * [ ] map could zoom in and zoom out to see restaurants
+  * [ ] User can view restaurants list based on search in the search box.
+  * [ ] User can select from selected cuisines shown as list
   * [ ] User can view restaurant list with name, distance, price and rating.
 * [ ] User can navigate to **view restaurants details**
   * [ ] User can see title, description, pictures, location, preferred, times, commits, rating of the restaurant.
