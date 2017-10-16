@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">HungryKya</string>
+    <string name="search">Search</string>
+    <string name="cuisine_american">American</string>
+    <string name="cuisine_italian">Italian</string>
+    <string name="cuisine_indian">Indian</string>
+    <string name="cuisine_chinese">Chinese</string>
+    <string name="cuisine_mexican">Mexican</string>
+    <string name="cuisine_mediterranean">Mediterranean</string>
+    <string name="cuisine_other">Others</string>
+
+</resources>

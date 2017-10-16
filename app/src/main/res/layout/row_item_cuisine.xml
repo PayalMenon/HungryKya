@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_cuisine_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/cuisine_image_height"
+            android:paddingTop="@dimen/cuisine_image_padding"
+            android:paddingLeft="@dimen/cuisine_image_padding"
+            android:paddingRight="@dimen/cuisine_image_padding"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/tv_cuisine_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_cuisine_image"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/cuisine_text_size" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
