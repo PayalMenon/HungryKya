@@ -33,6 +33,9 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
+The initial version of the app with dummy data is:
+<img src='https://github.com/HungryKya/HungryKya/blob/master/screenshot/hungryKya.gif' title='Initial Version' width='' alt='Initial Version' />
+
 ## Notes
 
 Describe any challenges encountered while building the app.
