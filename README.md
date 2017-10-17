@@ -1,6 +1,6 @@
 # Project - *HungryKya*
 
-**HungryKya** help the user find food to eat and in a fast manner. The app can also save the users earlier choice to suggest more options.
+**HungryKya** helps the user find food to eat and in a fast manner. The app can also save the users earlier choice to suggest more options.
 
 Team: Payal , Meng, Tristan.
 
