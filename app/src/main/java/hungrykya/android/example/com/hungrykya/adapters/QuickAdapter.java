@@ -36,8 +36,8 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
         Restaurant restaurant = mQuickList.get(position);
 
         holder.hotelTitle.setText(restaurant.getTitle());
-        holder.hotelDistance.setText(restaurant.getDistance());
-        holder.hotelRating.setText(restaurant.getRating());
+        holder.hotelDistance.setText(String.valueOf(restaurant.getDistance()));
+        holder.hotelRating.setText(String.valueOf(restaurant.getRating()));
 
         holder.hotelContainer.setOnClickListener(new View.OnClickListener() {
             @Override
