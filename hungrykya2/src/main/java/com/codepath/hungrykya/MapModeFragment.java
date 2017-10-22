@@ -19,12 +19,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapModeFragment extends Fragment implements OnMapReadyCallback {
 
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     public static final String TAG = MapModeFragment.class.getSimpleName();
 
     private String mParam1;
-    private String mParam2;
-
     private GoogleMap mMap;
 
     private OnMapModeListener mListener;
@@ -32,11 +29,10 @@ public class MapModeFragment extends Fragment implements OnMapReadyCallback {
     public MapModeFragment() {
     }
 
-    public static MapModeFragment newInstance(String param1, String param2) {
+    public static MapModeFragment newInstance(String param1) {
         MapModeFragment fragment = new MapModeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,7 +42,6 @@ public class MapModeFragment extends Fragment implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -56,10 +51,10 @@ public class MapModeFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
