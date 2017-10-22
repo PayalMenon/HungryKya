@@ -38,7 +38,7 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.fragment_list);
 
         ButterKnife.bind(this);
 
@@ -71,20 +71,6 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == R.id.action_filter) {
-
-            return true;
-        } else if (item.getItemId() == R.id.action_map) {
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void initializeCuisineList() {

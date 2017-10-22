@@ -11,4 +11,13 @@
     <string name="cuisine_mediterranean">Mediterranean</string>
     <string name="cuisine_other">Others</string>
 
+    <string name="title_home">Home</string>
+    <string name="title_preference">Preference</string>
+    <string name="title_notifications">Notification</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="mode_list_text">List</string>
+    <string name="mode_map_text">Map</string>
+    <string name="filter_button_text">Filter</string>
+    <string name="prefer_save_mode">save</string>
 </resources>

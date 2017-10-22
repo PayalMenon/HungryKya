@@ -1,1 +1,1 @@
-include ':app', ':hungrykya2'
+include ':app'

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_cuisine_list"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="@dimen/marginTop" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_quick_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_cuisine_list"
+            android:layout_marginTop="@dimen/marginTop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/list_map_mode_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:onClick="onSwitchListAndMode"
+                android:paddingEnd="0dp"
+                android:text="@string/mode_map_text" />
+
+            <Button
+                android:id="@+id/filter_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:paddingStart="0dp"
+                android:text="@string/filter_button_text" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <include layout="@layout/preference_filter_layout"/>
+</android.support.v4.widget.DrawerLayout>
