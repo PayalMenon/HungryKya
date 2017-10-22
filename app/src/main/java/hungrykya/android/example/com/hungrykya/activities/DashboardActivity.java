@@ -73,6 +73,20 @@ public class DashboardActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_filter) {
+
+            return true;
+        } else if (item.getItemId() == R.id.action_map) {
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initializeCuisineList() {
         mCuisineAdapter = new CuisineAdapter();
 

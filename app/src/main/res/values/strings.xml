@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">HungryKya</string>
     <string name="search">Search</string>
+    <string name="map">Map</string>
+    <string name="filter">Filter</string>
     <string name="cuisine_american">American</string>
     <string name="cuisine_italian">Italian</string>
     <string name="cuisine_indian">Indian</string>
