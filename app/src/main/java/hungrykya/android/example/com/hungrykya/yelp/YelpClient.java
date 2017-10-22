@@ -9,11 +9,13 @@ import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
+ * A YELP Client to fetch related data
+ *
  * Created by hyan on 10/22/17.
  */
-
 public class YelpClient {
     private final static String CONSUMER_ID= "enrCHrPA0nHLjLNXuPuOYw";
 
@@ -38,8 +40,42 @@ public class YelpClient {
         return InstanceHolder.INSTANCE;
     }
 
-    public void search(HashMap<String, String> queryParams, Callback<SearchResponse> callback) {
+    /**
+     * Asynchronous Requests Call to search all businesses
+     * see https://www.yelp.com/developers/documentation/v3/business_search
+     *
+     * Here is an example how you can search
+     * general params
+     * params.put("term", "indian food");
+     * params.put("latitude", "40.581140");
+     * params.put("longitude", "-111.914184");
+     *
+     * @param queryParams A query string map
+     * @param callback a callback handle the search
+     * @return a Call instance that is cancellable
+     */
+    public Call<SearchResponse>  search(HashMap<String, String> queryParams, Callback<SearchResponse> callback) {
         Call<SearchResponse> call = yelpAPI.getBusinessSearch(queryParams);
         call.enqueue(callback);
+        return call;
+    }
+
+    /**
+     * Synchronous Requests Call to search all businesses
+     * see https://www.yelp.com/developers/documentation/v3/business_search
+     *
+     * Here is an example how you can search
+     * general params
+     * params.put("term", "indian food");
+     * params.put("latitude", "40.581140");
+     * params.put("longitude", "-111.914184");
+     *
+     * @param queryParams
+     * @return a response instance that can retrieve business
+     * @throws IOException if any network problem occurs
+     */
+    public Response<SearchResponse> search(HashMap<String, String> queryParams) throws IOException {
+        Call<SearchResponse> call = yelpAPI.getBusinessSearch(queryParams);
+        return call.execute();
     }
 }
