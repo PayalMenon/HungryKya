@@ -1,5 +1,6 @@
 package hungrykya.android.example.com.hungrykya.adapters;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
 
     @Override
     public void onBindViewHolder(CuisineViewHolder holder, int position) {
-        holder.cuisineImage.setImageResource(mCuisineList[position]);
+
         holder.cuisineTitle.setText(mCuisineNames[position]);
     }
 
@@ -51,6 +52,12 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
         ImageView cuisineImage;
         @BindView(R.id.tv_cuisine_title)
         TextView cuisineTitle;
+        @BindView(R.id.tv_cuisine_distance)
+        TextView cuisineDistance;
+        @BindView(R.id.tv_cuisine_rating)
+        TextView cuisineRating;
+        @BindView(R.id.cv_cuisine_container)
+        CardView cuisineContainer;
 
         public CuisineViewHolder(View itemView) {
             super(itemView);

@@ -1,6 +1,7 @@
 package hungrykya.android.example.com.hungrykya.adapters;
 
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +36,10 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
         Restaurant restaurant = mQuickList.get(position);
 
         holder.hotelTitle.setText(restaurant.getTitle());
-        holder.hotelImage.setImageResource(restaurant.getImageUrl());
+        holder.hotelDistance.setText(String.valueOf(restaurant.getDistance()));
+        holder.hotelRating.setText(String.valueOf(restaurant.getRating()));
 
-        holder.hotelTitle.setOnClickListener(new View.OnClickListener() {
+        holder.hotelContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
@@ -57,6 +59,12 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
         ImageView hotelImage;
         @BindView(R.id.tv_quick_title)
         TextView hotelTitle;
+        @BindView(R.id.tv_quick_distance)
+        TextView hotelDistance;
+        @BindView(R.id.tv_quick_rating)
+        TextView hotelRating;
+        @BindView(R.id.cv_quick_card)
+        CardView hotelContainer;
 
         public QuickViewHolder(View itemView) {
             super(itemView);

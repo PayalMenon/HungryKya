@@ -99,27 +99,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     // dummy data. Will be replaced with actual data coming from the Yelp API
     private void getQuickListData() {
-        Integer[] mCuisineList = {R.drawable.american,
-                R.drawable.italian,
-                R.drawable.mexican,
-                R.drawable.indian,
-                R.drawable.chinese,
-                R.drawable.mediterrinian,
-                R.drawable.others};
-
-        Integer[] mCuisineNames = {R.string.cuisine_american,
-                R.string.cuisine_italian,
-                R.string.cuisine_mexican,
-                R.string.cuisine_indian,
-                R.string.cuisine_chinese,
-                R.string.cuisine_mediterranean,
-                R.string.cuisine_other};
-
-        for (int i = 0; i < mCuisineList.length; i++) {
-            Integer image = mCuisineList[i];
-            Integer name = mCuisineNames[i];
-            Restaurant restaurant = new Restaurant(image, name);
-            mQuickList.add(restaurant);
-        }
+        // call the method from rest client
     }
 }

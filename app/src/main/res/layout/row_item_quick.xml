@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cv_quick_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,19 +10,45 @@
 
         <ImageView
             android:id="@+id/iv_quick_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/row_image_width"
+            android:layout_height="@dimen/row_image_height"
             android:scaleType="fitXY" />
 
-        <TextView
-            android:id="@+id/tv_quick_title"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv_quick_image"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/marginTop"
-            android:layout_centerVertical="true"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/cuisine_text_size" />
+            android:layout_toRightOf="@id/iv_quick_image">
+
+            <TextView
+                android:id="@+id/tv_quick_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/cuisine_text_size" />
+
+            <TextView
+                android:id="@+id/tv_quick_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/tv_quick_title"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/cuisine_text_size" />
+
+            <TextView
+                android:id="@+id/tv_quick_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/tv_quick_rating"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/cuisine_text_size" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
