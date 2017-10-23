@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "414609610235",
+    "firebase_url": "https://hungrykya-20175.firebaseio.com",
+    "project_id": "hungrykya-20175",
+    "storage_bucket": "hungrykya-20175.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414609610235:android:8c5aeb3dd2e7a086",
+        "android_client_info": {
+          "package_name": "hungrykya.android.example.com.hungrykya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414609610235-ej2uj47t6qfr8724g3oq6k9c7e8q58ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsFYRyJC0morb-IdkMMZWax5echoRAxIY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

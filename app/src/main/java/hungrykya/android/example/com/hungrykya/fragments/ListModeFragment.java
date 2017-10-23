@@ -116,7 +116,8 @@ public class ListModeFragment extends Fragment {
         for (int i = 0; i < mCuisineList.length; i++) {
             Integer image = mCuisineList[i];
             Integer name = mCuisineNames[i];
-            Restaurant restaurant = new Restaurant(image, name);
+            Restaurant restaurant = new Restaurant();
+            //Restaurant restaurant = new Restaurant(image, name);
             mQuickList.add(restaurant);
         }
     }
