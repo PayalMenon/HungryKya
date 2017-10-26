@@ -141,4 +141,18 @@ public class Restaurant {
         }
         return restaurants;
     }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "mId='" + mId + '\'' +
+                ", mTitle='" + mTitle + '\'' +
+                ", mImageUrl='" + mImageUrl + '\'' +
+                ", mRating=" + mRating +
+                ", mDistance=" + mDistance +
+                ", closed=" + closed +
+                ", mLocation=" + mLocation +
+                ", photos=" + photos +
+                '}';
+    }
 }

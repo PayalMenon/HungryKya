@@ -6,6 +6,7 @@ import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +31,7 @@ public class YelpClient {
     private  YelpClient() {
         try {
             YelpFusionApiFactory apiFactory = new YelpFusionApiFactory();
-            YelpFusionApi yelpFusionApi = apiFactory.createAPI(CONSUMER_ID, CONSUMER_SECRET);
+            yelpAPI = apiFactory.createAPI(CONSUMER_ID, CONSUMER_SECRET);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +55,7 @@ public class YelpClient {
      * @param callback a callback handle the search
      * @return a Call instance that is cancellable
      */
-    public Call<SearchResponse>  search(HashMap<String, String> queryParams, Callback<SearchResponse> callback) {
+    public Call<SearchResponse>  search(Map<String, String> queryParams, Callback<SearchResponse> callback) {
         Call<SearchResponse> call = yelpAPI.getBusinessSearch(queryParams);
         call.enqueue(callback);
         return call;
@@ -74,7 +75,7 @@ public class YelpClient {
      * @return a response instance that can retrieve business
      * @throws IOException if any network problem occurs
      */
-    public Response<SearchResponse> search(HashMap<String, String> queryParams) throws IOException {
+    public Response<SearchResponse> search(Map<String, String> queryParams) throws IOException {
         Call<SearchResponse> call = yelpAPI.getBusinessSearch(queryParams);
         return call.execute();
     }
