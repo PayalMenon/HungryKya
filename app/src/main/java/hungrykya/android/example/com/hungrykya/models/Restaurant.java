@@ -1,5 +1,8 @@
 package hungrykya.android.example.com.hungrykya.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.yelp.fusion.client.models.Business;
 import com.yelp.fusion.client.models.Location;
 import com.yelp.fusion.client.models.SearchResponse;
@@ -9,7 +12,7 @@ import java.util.List;
 
 import retrofit2.Response;
 
-public class Restaurant {
+public class Restaurant{
     private String mId;
 
     private String mTitle;
@@ -35,7 +38,6 @@ public class Restaurant {
         this.mDistance = distance;
     }
 
-
     public String getId() {
         return mId;
     }
@@ -57,7 +59,7 @@ public class Restaurant {
     }
 
     public void setTitle(String title) {
-        this.mTitle = mTitle;
+        this.mTitle = title;
     }
 
     public Double getRating() {

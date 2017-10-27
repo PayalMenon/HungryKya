@@ -1,5 +1,6 @@
 package hungrykya.android.example.com.hungrykya.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -20,6 +23,7 @@ import hungrykya.android.example.com.hungrykya.models.Restaurant;
 public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHolder>{
 
     private List<Restaurant> mQuickList;
+    Context mContext;
 
     public QuickAdapter(List<Restaurant> list) {
         this.mQuickList = list;
@@ -27,6 +31,7 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
 
     @Override
     public QuickViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_quick, parent, false);
         return new QuickViewHolder(view);
     }
@@ -38,6 +43,10 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
         holder.hotelTitle.setText(restaurant.getTitle());
         holder.hotelDistance.setText(String.valueOf(restaurant.getDistance()));
         holder.hotelRating.setText(String.valueOf(restaurant.getRating()));
+
+        Glide.with(mContext)
+                .load(restaurant.getImageUrl())
+                .into(holder.hotelImage);
 
         holder.hotelContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +60,10 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
     @Override
     public int getItemCount() {
         return mQuickList.size();
+    }
+
+    public void updateList(List<Restaurant> list) {
+        mQuickList = list;
     }
 
     public class QuickViewHolder extends RecyclerView.ViewHolder{
