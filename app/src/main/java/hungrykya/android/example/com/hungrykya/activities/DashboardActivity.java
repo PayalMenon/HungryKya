@@ -106,6 +106,13 @@ public class DashboardActivity extends AppCompatActivity{
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("HungryKya", "searched for" + query);
+
+                mQuickList.clear();
+                mQuickAdapter.updateList(mQuickList);
+
+                HashMap<String, String> paramMap = new HashMap<>();
+                paramMap.put("term", query);
+                getQuickListData(paramMap);
                 return false;
             }
 
@@ -138,15 +145,19 @@ public class DashboardActivity extends AppCompatActivity{
         mQuickView.setAdapter(mQuickAdapter);
         mQuickView.setLayoutManager(quickManager);
 
-        getQuickListData();
+        HashMap<String, String> paramMap = new HashMap<>();
+        paramMap.put("latitude", String.valueOf(mLocation.getLatitude()));
+        paramMap.put("longitude", String.valueOf(mLocation.getLongitude()));
+
+        getQuickListData(paramMap);
 
     }
 
     // dummy data. Will be replaced with actual data coming from the Yelp API
-    private void getQuickListData() {
+    private void getQuickListData(HashMap<String, String> queryParams) {
 
         Intent yelpService = new Intent(this, YelpService.class);
-        yelpService.putExtra("CurrentLocation", mLocation);
+        yelpService.putExtra("QueryParams", queryParams);
         startService(yelpService);
     }
 }

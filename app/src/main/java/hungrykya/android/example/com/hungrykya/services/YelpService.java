@@ -30,12 +30,9 @@ public class YelpService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
 
-        Location location = intent.getParcelableExtra("CurrentLocation");
+        HashMap<String, String> paramMap = (HashMap<String, String>) intent.getSerializableExtra("QueryParams");
 
         YelpClient client = YelpClient.getClient();
-        HashMap<String, String> paramMap = new HashMap<>();
-        paramMap.put("latitude", String.valueOf(location.getLatitude()));
-        paramMap.put("longitude", String.valueOf(location.getLongitude()));
 
         client.search(paramMap, new Callback<SearchResponse>() {
             @Override
