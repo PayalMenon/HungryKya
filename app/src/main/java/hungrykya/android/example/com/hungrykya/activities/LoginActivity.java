@@ -275,10 +275,9 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Toast.makeText(this, connectionResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
     }
 
 }

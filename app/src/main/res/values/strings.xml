@@ -39,4 +39,5 @@
 
     <string name="facebook_app_id">743452245858470</string>
     <string name="fb_login_protocol_scheme">fb743452245858470</string>
+    <string name="error_location_provider">location or network is not working</string>
 </resources>

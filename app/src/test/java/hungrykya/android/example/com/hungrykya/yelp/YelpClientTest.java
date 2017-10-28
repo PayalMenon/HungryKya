@@ -1,19 +1,8 @@
 package hungrykya.android.example.com.hungrykya.yelp;
 
-import com.yelp.fusion.client.models.SearchResponse;
-
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Map;
-
-import hungrykya.android.example.com.hungrykya.models.Restaurant;
 import hungrykya.android.example.com.hungrykya.models.SearchPreference;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by mengzhou on 10/25/17.
@@ -31,7 +20,7 @@ public class YelpClientTest {
 
         System.out.println("testing started");
 
-        Map<String, String> objectMap = preference.getPreference();
+        /*Map<String, String> objectMap = preference.getPreference();
         yelpClient.search(objectMap, new Callback<SearchResponse>() {
             @Override
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
@@ -39,6 +28,7 @@ public class YelpClientTest {
                 System.out.println(response.body().getTotal());
                 List<Restaurant> restaurants = Restaurant.restaurantsFromResponse(response.body());
                 System.out.println(restaurants == null ? "get null " : "size: " + restaurants.size());
+                assert restaurants != null;
                 for (Restaurant restaurant : restaurants) {
                     System.out.println(restaurant.toString());
                 }
@@ -49,7 +39,7 @@ public class YelpClientTest {
                 System.out.println("testing failed");
                 System.out.println(t.getMessage());
             }
-        });
+        });*/
 
         Thread.sleep(2000);
         System.out.println("testing finished");

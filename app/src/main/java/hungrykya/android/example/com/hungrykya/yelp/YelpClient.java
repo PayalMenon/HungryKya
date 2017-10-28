@@ -2,15 +2,16 @@ package hungrykya.android.example.com.hungrykya.yelp;
 
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.connection.YelpFusionApiFactory;
+import com.yelp.fusion.client.models.Business;
 import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * A YELP Client to fetch related data
@@ -52,31 +53,10 @@ public class YelpClient {
      * params.put("longitude", "-111.914184");
      *
      * @param queryParams A query string map
-     * @param callback a callback handle the search
      * @return a Call instance that is cancellable
      */
-    public Call<SearchResponse>  search(Map<String, String> queryParams, Callback<SearchResponse> callback) {
-        Call<SearchResponse> call = yelpAPI.getBusinessSearch(queryParams);
-        call.enqueue(callback);
-        return call;
-    }
-
-    /**
-     * Synchronous Requests Call to search all businesses
-     * see https://www.yelp.com/developers/documentation/v3/business_search
-     *
-     * Here is an example how you can search
-     * general params
-     * params.put("term", "indian food");
-     * params.put("latitude", "40.581140");
-     * params.put("longitude", "-111.914184");
-     *
-     * @param queryParams
-     * @return a response instance that can retrieve business
-     * @throws IOException if any network problem occurs
-     */
-    public Response<SearchResponse> search(Map<String, String> queryParams) throws IOException {
-        Call<SearchResponse> call = yelpAPI.getBusinessSearch(queryParams);
-        return call.execute();
+    public Observable<ArrayList<Business>> search(Map<String, String> queryParams) {
+        return yelpAPI.getBusinessSearch(queryParams).subscribeOn(Schedulers.io())
+                .map(SearchResponse::getBusinesses).observeOn(AndroidSchedulers.mainThread());
     }
 }

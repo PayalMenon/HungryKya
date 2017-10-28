@@ -16,8 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hungrykya.android.example.com.hungrykya.fragments.ListModeFragment;

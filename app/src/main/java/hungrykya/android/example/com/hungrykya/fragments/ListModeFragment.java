@@ -13,13 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yelp.fusion.client.models.Business;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import hungrykya.android.example.com.hungrykya.R;
 import hungrykya.android.example.com.hungrykya.adapters.CuisineAdapter;
 import hungrykya.android.example.com.hungrykya.adapters.QuickAdapter;
-import hungrykya.android.example.com.hungrykya.models.Restaurant;
+import hungrykya.android.example.com.hungrykya.models.SearchPreference;
+import hungrykya.android.example.com.hungrykya.yelp.YelpClient;
 
 public class ListModeFragment extends Fragment {
 
@@ -37,8 +41,6 @@ public class ListModeFragment extends Fragment {
 
     CuisineAdapter mCuisineAdapter;
     QuickAdapter mQuickAdapter;
-
-    List<Restaurant> mQuickList = new ArrayList<>();
 
     public ListModeFragment() {
     }
@@ -87,39 +89,19 @@ public class ListModeFragment extends Fragment {
     }
 
     private void initializeQuickList() {
-
-        getQuickListData();
-        mQuickAdapter = new QuickAdapter(mQuickList);
-
-        mQuickView.setAdapter(mQuickAdapter);
-        mQuickView.setLayoutManager(new LinearLayoutManager(getContext()));
+        YelpClient.getClient().search(getSearch()).subscribe(businesses -> {
+            mQuickAdapter = new QuickAdapter(businesses);
+            mQuickView.setAdapter(mQuickAdapter);
+            mQuickView.setLayoutManager(new LinearLayoutManager(getContext()));
+        });
     }
 
-    // dummy data. Will be replaced with actual data coming from the Yelp API
-    private void getQuickListData() {
-        Integer[] mCuisineList = {R.drawable.american,
-                R.drawable.italian,
-                R.drawable.mexican,
-                R.drawable.indian,
-                R.drawable.chinese,
-                R.drawable.mediterrinian,
-                R.drawable.others};
-
-        Integer[] mCuisineNames = {R.string.cuisine_american,
-                R.string.cuisine_italian,
-                R.string.cuisine_mexican,
-                R.string.cuisine_indian,
-                R.string.cuisine_chinese,
-                R.string.cuisine_mediterranean,
-                R.string.cuisine_other};
-
-        for (int i = 0; i < mCuisineList.length; i++) {
-            Integer image = mCuisineList[i];
-            Integer name = mCuisineNames[i];
-            Restaurant restaurant = new Restaurant();
-            //Restaurant restaurant = new Restaurant(image, name);
-            mQuickList.add(restaurant);
-        }
+    public Map<String, String> getSearch() {
+        SearchPreference preference = new SearchPreference();
+        preference.setTerm("restaurants");
+        preference.setLatitude(37.4179252);
+        preference.setLongitude(-121.9812671);
+        return preference.getPreference();
     }
 
     @Override

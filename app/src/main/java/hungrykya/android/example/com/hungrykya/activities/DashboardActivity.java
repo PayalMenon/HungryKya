@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.yelp.fusion.client.models.Business;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,6 @@ import butterknife.ButterKnife;
 import hungrykya.android.example.com.hungrykya.R;
 import hungrykya.android.example.com.hungrykya.adapters.CuisineAdapter;
 import hungrykya.android.example.com.hungrykya.adapters.QuickAdapter;
-import hungrykya.android.example.com.hungrykya.models.Restaurant;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity {
     CuisineAdapter mCuisineAdapter;
     QuickAdapter mQuickAdapter;
 
-    List<Restaurant> mQuickList = new ArrayList<>();
+    List<Business> mQuickList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,19 +9,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yelp.fusion.client.models.Business;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hungrykya.android.example.com.hungrykya.R;
 import hungrykya.android.example.com.hungrykya.activities.DetailActivity;
-import hungrykya.android.example.com.hungrykya.models.Restaurant;
 
 public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHolder>{
 
-    private List<Restaurant> mQuickList;
+    private List<Business> mQuickList;
 
-    public QuickAdapter(List<Restaurant> list) {
+    public QuickAdapter(List<Business> list) {
         this.mQuickList = list;
     }
 
@@ -33,9 +34,9 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
 
     @Override
     public void onBindViewHolder(final QuickViewHolder holder, int position) {
-        Restaurant restaurant = mQuickList.get(position);
+        Business restaurant = mQuickList.get(position);
 
-        holder.hotelTitle.setText(restaurant.getTitle());
+        holder.hotelTitle.setText(restaurant.getName());
         holder.hotelDistance.setText(String.valueOf(restaurant.getDistance()));
         holder.hotelRating.setText(String.valueOf(restaurant.getRating()));
 

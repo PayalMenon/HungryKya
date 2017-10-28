@@ -13,7 +13,6 @@ import hungrykya.android.example.com.hungrykya.models.User;
 /**
  * Created by hyan on 10/22/17.
  */
-
 public class FirebaseClient {
     private static final String TAG = "FirebaseClient";
 
