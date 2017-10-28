@@ -1,5 +1,10 @@
 package hungrykya.android.example.com.hungrykya.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,9 +16,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+<<<<<<< HEAD
 import com.yelp.fusion.client.models.Business;
+=======
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.twitter.sdk.android.core.models.Search;
+import com.yelp.fusion.client.models.SearchResponse;
+>>>>>>> e0672c8357cd2ce98bc2b12d4323410d6d47f8ed
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,8 +34,17 @@ import butterknife.ButterKnife;
 import hungrykya.android.example.com.hungrykya.R;
 import hungrykya.android.example.com.hungrykya.adapters.CuisineAdapter;
 import hungrykya.android.example.com.hungrykya.adapters.QuickAdapter;
+<<<<<<< HEAD
+=======
+import hungrykya.android.example.com.hungrykya.models.Restaurant;
+import hungrykya.android.example.com.hungrykya.services.YelpService;
+import hungrykya.android.example.com.hungrykya.yelp.YelpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+>>>>>>> e0672c8357cd2ce98bc2b12d4323410d6d47f8ed
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -36,6 +58,22 @@ public class DashboardActivity extends AppCompatActivity {
 
     List<Business> mQuickList = new ArrayList<>();
 
+    Location mLocation;
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String data = intent.getStringExtra("DATA");
+            Gson gson = new Gson();
+
+            mQuickList = gson.fromJson(data, new TypeToken<List<Restaurant>>() {}.getType());
+
+            mQuickAdapter.updateList(mQuickList);
+            mQuickAdapter.notifyDataSetChanged();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +83,21 @@ public class DashboardActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
+        mLocation = getIntent().getParcelableExtra("CurrentLocation");
         initializeCuisineList();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver( mReceiver, new IntentFilter("RESPONSELIST"));
         initializeQuickList();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver( mReceiver);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,6 +113,13 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("HungryKya", "searched for" + query);
+
+                mQuickList.clear();
+                mQuickAdapter.updateList(mQuickList);
+
+                HashMap<String, String> paramMap = new HashMap<>();
+                paramMap.put("term", query);
+                getQuickListData(paramMap);
                 return false;
             }
 
@@ -86,8 +144,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void initializeQuickList() {
 
-        getQuickListData();
-
         mQuickAdapter = new QuickAdapter(mQuickList);
 
         LinearLayoutManager quickManager =
@@ -96,10 +152,19 @@ public class DashboardActivity extends AppCompatActivity {
         mQuickView.setAdapter(mQuickAdapter);
         mQuickView.setLayoutManager(quickManager);
 
+        HashMap<String, String> paramMap = new HashMap<>();
+        paramMap.put("latitude", String.valueOf(mLocation.getLatitude()));
+        paramMap.put("longitude", String.valueOf(mLocation.getLongitude()));
+
+        getQuickListData(paramMap);
+
     }
 
     // dummy data. Will be replaced with actual data coming from the Yelp API
-    private void getQuickListData() {
-        // call the method from rest client
+    private void getQuickListData(HashMap<String, String> queryParams) {
+
+        Intent yelpService = new Intent(this, YelpService.class);
+        yelpService.putExtra("QueryParams", queryParams);
+        startService(yelpService);
     }
 }
