@@ -19,9 +19,13 @@ import io.reactivex.schedulers.Schedulers;
  * Created by hyan on 10/22/17.
  */
 public class YelpClient {
+    // https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=RASASUdy0pC5sr8SG7j_3w
+    // &client_secret=wngRbKYbSjM0EaMAiHYga15lhHccv9eBGwULJbdutaGroELLtEdJvXZKBqIToWo9
     private final static String CONSUMER_ID= "enrCHrPA0nHLjLNXuPuOYw";
+    // RASASUdy0pC5sr8SG7j_3w
 
     private final static String CONSUMER_SECRET= "VOySH79I4Xlbmz6ufOAxM8baphpvNuah1qw093dZIkc5tiPx96l6ohSzfG4xk327";
+    // wngRbKYbSjM0EaMAiHYga15lhHccv9eBGwULJbdutaGroELLtEdJvXZKBqIToWo9
 
     private YelpFusionApi yelpAPI;
 
@@ -57,6 +61,6 @@ public class YelpClient {
      */
     public Observable<ArrayList<Business>> search(Map<String, String> queryParams) {
         return yelpAPI.getBusinessSearch(queryParams).subscribeOn(Schedulers.io())
-                .map(SearchResponse::getBusinesses).observeOn(AndroidSchedulers.mainThread());
+                .map(SearchResponse::getBusinesses)/*.observeOn(AndroidSchedulers.mainThread())*/;
     }
 }

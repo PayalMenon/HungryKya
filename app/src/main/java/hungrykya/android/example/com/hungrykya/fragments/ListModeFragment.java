@@ -9,11 +9,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ import hungrykya.android.example.com.hungrykya.adapters.CuisineAdapter;
 import hungrykya.android.example.com.hungrykya.adapters.QuickAdapter;
 import hungrykya.android.example.com.hungrykya.models.SearchPreference;
 import hungrykya.android.example.com.hungrykya.yelp.YelpClient;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class ListModeFragment extends Fragment {
 
@@ -71,9 +74,9 @@ public class ListModeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mDrawer = view.findViewById(R.id.drawer_layout);
-        view.findViewById(R.id.filter_btn).setOnClickListener(listener -> {
-            mDrawer.openDrawer(GravityCompat.END);
-        });
+        view.findViewById(R.id.filter_btn).setOnClickListener(listener ->
+            mDrawer.openDrawer(GravityCompat.END)
+        );
 
         mCuisineView = view.findViewById(R.id.rv_cuisine_list);
         mQuickView = view.findViewById(R.id.rv_quick_list);
@@ -89,10 +92,12 @@ public class ListModeFragment extends Fragment {
     }
 
     private void initializeQuickList() {
-        YelpClient.getClient().search(getSearch()).subscribe(businesses -> {
+        YelpClient.getClient().search(getSearch()).observeOn(AndroidSchedulers.mainThread()).subscribe(businesses -> {
             mQuickAdapter = new QuickAdapter(businesses);
             mQuickView.setAdapter(mQuickAdapter);
             mQuickView.setLayoutManager(new LinearLayoutManager(getContext()));
+            Location location = businesses.get(0).getLocation();
+            Log.e(TAG, "*****************************" + location.toString());
         });
     }
 

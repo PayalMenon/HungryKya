@@ -6,12 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.widget.TextView;
 
 /**
  * @author Eric Frohnhoefer
  */
-public class UnderlineTextView  extends TextView {
+public class UnderlineTextView  extends android.support.v7.widget.AppCompatTextView {
     private final Paint mPaint = new Paint();
     private int mUnderlineHeight = 0;
 

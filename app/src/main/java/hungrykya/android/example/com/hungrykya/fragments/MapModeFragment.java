@@ -3,22 +3,18 @@ package hungrykya.android.example.com.hungrykya.fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,18 +22,23 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.Location;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import hungrykya.android.example.com.hungrykya.R;
 import hungrykya.android.example.com.hungrykya.adapters.CuisineAdapter;
+import hungrykya.android.example.com.hungrykya.models.SearchPreference;
+import hungrykya.android.example.com.hungrykya.yelp.YelpClient;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MapModeFragment extends Fragment implements OnMapReadyCallback {
 
@@ -148,21 +149,61 @@ public class MapModeFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMyLocationClickListener(location -> {
             Toast.makeText(getContext(), location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
         });
-        mMap.setOnMapClickListener(latLng -> Toast.makeText(getContext(), latLng.latitude + ", " + latLng.longitude, Toast.LENGTH_SHORT).show());
+        mMap.setOnMapClickListener(latLng ->  {
+            Toast.makeText(getContext(), latLng.latitude + ", " + latLng.longitude, Toast.LENGTH_SHORT).show();
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        });
 
-        drawMarker(new GPSClass().getCurrentLocation(getContext()));
+
+        YelpClient.getClient().search(getSearch()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(businesses -> {
+                    for(Business business : businesses) {
+                        drawMarker(business.getLocation());
+                    }
+                });
+    }
+
+    public Map<String, String> getSearch() {
+        SearchPreference preference = new SearchPreference();
+        preference.setTerm("restaurants");
+        preference.setLatitude(37.4179252);
+        preference.setLongitude(-121.9812671);
+        return preference.getPreference();
     }
 
     private void drawMarker(Location location) {
         if (mMap != null && location != null) {
             mMap.clear();
-            LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(gps));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 12));
+            StringBuilder address = new StringBuilder();
+            address.append(location.getAddress1() + ", ");
+            address.append(location.getCity() + ", ");
+            address.append(location.getState() + ", ");
+            address.append(location.getZipCode());
+            LatLng latLng = getLocationFromAddress(getContext(), address.toString());
+            if(latLng == null) return;
+            mMap.addMarker(new MarkerOptions().position(latLng).title(location.getDisplayAddress().toString()));
         }
+    }
 
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p1;
+
     }
 }

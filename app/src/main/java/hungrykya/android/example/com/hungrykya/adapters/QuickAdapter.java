@@ -10,11 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-<<<<<<< HEAD
 import com.yelp.fusion.client.models.Business;
-=======
 import com.bumptech.glide.Glide;
->>>>>>> e0672c8357cd2ce98bc2b12d4323410d6d47f8ed
 
 import java.util.List;
 
@@ -25,12 +22,8 @@ import hungrykya.android.example.com.hungrykya.activities.DetailActivity;
 
 public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHolder>{
 
-<<<<<<< HEAD
     private List<Business> mQuickList;
-=======
-    private List<Restaurant> mQuickList;
     Context mContext;
->>>>>>> e0672c8357cd2ce98bc2b12d4323410d6d47f8ed
 
     public QuickAdapter(List<Business> list) {
         this.mQuickList = list;
@@ -50,17 +43,13 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
         holder.hotelTitle.setText(restaurant.getName());
         holder.hotelDistance.setText(String.valueOf(restaurant.getDistance()));
         holder.hotelRating.setText(String.valueOf(restaurant.getRating()));
-
         Glide.with(mContext)
                 .load(restaurant.getImageUrl())
                 .into(holder.hotelImage);
 
-        holder.hotelContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
-                holder.itemView.getContext().startActivity(intent);
-            }
+        holder.hotelContainer.setOnClickListener(view -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+            holder.itemView.getContext().startActivity(intent);
         });
     }
 
@@ -69,7 +58,7 @@ public class QuickAdapter extends RecyclerView.Adapter<QuickAdapter.QuickViewHol
         return mQuickList.size();
     }
 
-    public void updateList(List<Restaurant> list) {
+    public void updateList(List<Business> list) {
         mQuickList = list;
     }
 

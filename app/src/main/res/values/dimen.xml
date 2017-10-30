@@ -4,8 +4,8 @@
     <dimen name="cuisine_image_padding">10dp</dimen>
     <dimen name="cuisine_image_height">150dp</dimen>
     <dimen name="detail_image_height">300dp</dimen>
-    <dimen name="row_image_height">150dp</dimen>
-    <dimen name="row_image_width">150dp</dimen>
+    <dimen name="row_image_height">100dp</dimen>
+    <dimen name="row_image_width">100dp</dimen>
     <dimen name="row_margin_top">5dp</dimen>
 
     <dimen name="cuisine_text_size">14sp</dimen>

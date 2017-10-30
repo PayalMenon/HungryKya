@@ -2,17 +2,12 @@ package com.yelp.fusion.client.connection;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
 import com.yelp.fusion.client.connection.interceptors.AccessTokenInterceptor;
 import com.yelp.fusion.client.exception.ErrorHandlingInterceptor;
 import com.yelp.fusion.client.models.AccessToken;
 
 import java.io.IOException;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,14 +22,15 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class YelpFusionApiFactory {
     private static final String YELP_API_BASE_URL = "https://api.yelp.com";
+    private static final String ACCESS_TOKEN = "WWYsE6DRjccMqkgsnF_hfv-z7r5ZJAuvAtWti_RuK2Q-fE64WODM9CYTuZuyP89dHEI_ee8tbnzjtSuGeHW0zmOzAy_YDT7I95Kwpm5Q9_I8La6Cds37kcTVfCbxWXYx";
 
     private AccessToken accessToken;
 
     public YelpFusionApiFactory() {}
 
     public YelpFusionApi createAPI(String clientId, String clientSecret) throws IOException {
-        getAccessToken(clientId, clientSecret);
-        long timeout = 5000;
+        if(accessToken == null) getAccessToken(clientId, clientSecret);
+        /*long timeout = 10000;
         while (accessToken == null && timeout > 0) {
             try {
                 Thread.sleep(500);
@@ -42,13 +38,14 @@ public class YelpFusionApiFactory {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+        if(accessToken == null) return createAPI();
         return getYelpFusionApi();
     }
 
-    public YelpFusionApi createAPI(String accessToken) throws IOException {
+    public YelpFusionApi createAPI() throws IOException {
         this.accessToken = new AccessToken();
-        this.accessToken.setAccessToken(accessToken);
+        this.accessToken.setAccessToken(ACCESS_TOKEN);
         this.accessToken.setTokenType("Bearer");
         return getYelpFusionApi();
     }
@@ -95,6 +92,10 @@ public class YelpFusionApiFactory {
                 }
             }
         });
+    }
+
+    public AccessToken getAccessToken() {
+        return accessToken;
     }
 
     private static JacksonConverterFactory getJacksonFactory(){

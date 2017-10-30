@@ -90,4 +90,18 @@ public class Location
     }
     ArrayList<String> displayAddress;
 
+    @Override
+    public String toString() {
+        return "Location{" +
+                "state='" + state + '\'' +
+                ", address3='" + address3 + '\'' +
+                ", crossStreets='" + crossStreets + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", address1='" + address1 + '\'' +
+                ", displayAddress=" + displayAddress +
+                '}';
+    }
 }

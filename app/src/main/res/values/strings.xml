@@ -20,7 +20,8 @@
     <string name="mode_map_text">Map</string>
     <string name="filter_button_text">Filter</string>
     <string name="prefer_save_mode">save</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">HungryKya</string>
+    <string name="title_activity_main">Recommend Restaurant</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

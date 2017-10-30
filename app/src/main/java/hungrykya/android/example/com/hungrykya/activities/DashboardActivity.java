@@ -16,14 +16,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-<<<<<<< HEAD
 import com.yelp.fusion.client.models.Business;
-=======
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.twitter.sdk.android.core.models.Search;
-import com.yelp.fusion.client.models.SearchResponse;
->>>>>>> e0672c8357cd2ce98bc2b12d4323410d6d47f8ed
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,15 +29,9 @@ import butterknife.ButterKnife;
 import hungrykya.android.example.com.hungrykya.R;
 import hungrykya.android.example.com.hungrykya.adapters.CuisineAdapter;
 import hungrykya.android.example.com.hungrykya.adapters.QuickAdapter;
-<<<<<<< HEAD
-=======
 import hungrykya.android.example.com.hungrykya.models.Restaurant;
 import hungrykya.android.example.com.hungrykya.services.YelpService;
-import hungrykya.android.example.com.hungrykya.yelp.YelpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
->>>>>>> e0672c8357cd2ce98bc2b12d4323410d6d47f8ed
+
 
 public class DashboardActivity extends AppCompatActivity{
 
